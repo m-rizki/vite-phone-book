@@ -22,7 +22,7 @@ const Home = () => {
   const contacts: Contact[] = data.contact;
 
   return (
-    <div>
+    <section>
       <h1>Contacts</h1>
       <hr />
       <Contacts items={contacts} />
@@ -37,7 +37,7 @@ const Home = () => {
           Next
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
