@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_CONTACT_LIST } from "../graphql/queries/contact-queries";
-import { useState } from "react";
+
 import Contacts from "../components/contacts/contacts";
+
+import { buttonStyle } from "../components/form/form-style";
+import { css } from "@emotion/react";
+
+const paginationStyle = css`
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+`;
 
 const PAGE_SIZE = 10;
 
@@ -12,32 +23,38 @@ const Home = () => {
     variables: {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
+      order_by: [{ created_at: "desc" }],
     },
   });
 
-  if (loading) return <p>Loading...</p>;
-
-  if (error) return <p>Error: {error.message}</p>;
-
-  const contacts: Contact[] = data.contact;
+  const contacts: Contact[] = data?.contact || [];
 
   return (
-    <div>
+    <section>
       <h1>Contacts</h1>
-      <hr />
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+
       <Contacts items={contacts} />
-      <div>
-        <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-          Previous
-        </button>
+
+      <div css={paginationStyle}>
         <button
+          css={buttonStyle}
+          onClick={() => setPage(page - 1)}
+          disabled={page === 0 || contacts.length === 0}
+        >
+          &lt;
+        </button>
+        <span>{page + 1}</span>
+        <button
+          css={buttonStyle}
           onClick={() => setPage(page + 1)}
           disabled={contacts.length < PAGE_SIZE}
         >
-          Next
+          &gt;
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
