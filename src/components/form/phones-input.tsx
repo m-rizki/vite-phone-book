@@ -1,15 +1,26 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { buttonStyle, formControlPhone, inputPhoneStyle } from "./form-style";
 
 interface PhonesInputProps {
   value: Phone[];
   onPhoneChange: (phones: Phone[]) => void;
+  disabled: boolean;
+  reset: boolean; // New prop to control the reset
 }
 
 export default function PhonesInput({
   value,
   onPhoneChange,
+  disabled,
+  reset,
 }: PhonesInputProps) {
   const [phones, setPhones] = useState<Phone[]>(value);
+
+  useEffect(() => {
+    if (reset) {
+      setPhones([{ number: "" }]);
+    }
+  }, [reset]);
 
   const handlePhonesChange = (
     index: number,
@@ -38,21 +49,33 @@ export default function PhonesInput({
   return (
     <div>
       {phones.map((phone, index) => (
-        <div key={index}>
+        <div css={formControlPhone} key={index}>
           <input
+            css={inputPhoneStyle}
             name={`phone_${index}`}
             type="text"
             value={phone.number}
             onChange={(event) => handlePhonesChange(index, event)}
+            disabled={disabled}
             required
           />
-          <button type="button" onClick={() => removePhone(index)}>
-            remove
+          <button
+            css={buttonStyle}
+            type="button"
+            onClick={() => removePhone(index)}
+            disabled={disabled}
+          >
+            -
           </button>
         </div>
       ))}
-      <button type="button" onClick={addPhone}>
-        add
+      <button
+        css={buttonStyle}
+        type="button"
+        onClick={addPhone}
+        disabled={disabled}
+      >
+        +
       </button>
     </div>
   );
