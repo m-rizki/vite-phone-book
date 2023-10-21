@@ -60,6 +60,8 @@ export default function CreateContact() {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           disabled={loading}
+          pattern="^[a-zA-Z0-9]+$"
+          title="First Name can only contain letters and / or numbers"
           required
         />
       </div>
@@ -71,6 +73,8 @@ export default function CreateContact() {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           disabled={loading}
+          pattern="^[a-zA-Z0-9]+$"
+          title="Last Name can only contain letters and / or numbers"
           required
         />
       </div>

@@ -1,8 +1,8 @@
-import CreateContact from "../components/form/create-contact";
+import CreateContact from "../components/form/create-contact-form";
 import { titleContainerStyle } from "../components/globalStyle";
 import Divider from "../components/ui/divider";
 
-const ContactForm = () => {
+const AddContact = () => {
   return (
     <section>
       <div css={titleContainerStyle}>
@@ -14,4 +14,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default AddContact;
