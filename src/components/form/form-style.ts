@@ -48,7 +48,7 @@ export const inputStyle = css`
 export const inputPhoneStyle = css`
   ${baseInputStyle}
   @media (min-width: 768px) {
-    width: 256px;
+    width: 450px;
   }
 `;
 
@@ -64,13 +64,13 @@ export const baseButtonStyle = css`
 
 export const buttonStyle = css`
   ${baseButtonStyle}
-  background-color: #1eb854;
+  background-color: #15803d;
   &:hover {
-    background-color: #128941;
+    background-color: #16a34a;
   }
 
   &:active {
-    background-color: #0c5f2e;
+    background-color: #14532d;
   }
 
   &:disabled {
@@ -89,3 +89,21 @@ export const submitButtonStyle = css`
     width: 256px;
   }
 `;
+
+export const errorButtonStyle = css`
+  ${baseButtonStyle}
+  background-color: #e11d48;
+  &:hover {
+    background-color: #f43f5e;
+  }
+
+  &:active {
+    background-color: #9f1239;
+  }
+
+  &:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+`

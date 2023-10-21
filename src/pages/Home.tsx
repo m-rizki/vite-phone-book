@@ -1,11 +1,14 @@
+import { css } from "@emotion/react";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { GET_CONTACT_LIST } from "../graphql/queries/contact-queries";
 
 import Contacts from "../components/contacts/contacts";
 
 import { buttonStyle } from "../components/form/form-style";
-import { css } from "@emotion/react";
+import Divider from "../components/ui/divider";
+import { titleContainerStyle } from "../components/globalStyle";
 
 const paginationStyle = css`
   margin: 1rem;
@@ -17,6 +20,8 @@ const paginationStyle = css`
 const PAGE_SIZE = 10;
 
 const Home = () => {
+  const navigate = useNavigate()
+
   const [page, setPage] = useState(0);
 
   const { loading, error, data } = useQuery(GET_CONTACT_LIST, {
@@ -31,7 +36,11 @@ const Home = () => {
 
   return (
     <section>
-      <h1>Contacts</h1>
+      <div css={titleContainerStyle}>
+        <h1>Contacts</h1>
+        <button css={buttonStyle} onClick={() => navigate("/contact")}>+</button>
+      </div>
+      <Divider />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
 
@@ -41,7 +50,7 @@ const Home = () => {
         <button
           css={buttonStyle}
           onClick={() => setPage(page - 1)}
-          disabled={page === 0 || contacts.length === 0}
+          disabled={page === 0}
         >
           &lt;
         </button>

@@ -10,8 +10,9 @@ const MainNavigation = () => {
   return (
     <header>
       <NavigationContainer>
-        <NavLink to={``}>Home</NavLink>
-        <NavLink to={`contact`}>create contact</NavLink>
+        <NavLink to={``}>
+          <img src="/icons/contacts.svg" alt="contacts" />
+        </NavLink>
       </NavigationContainer>
     </header>
   );

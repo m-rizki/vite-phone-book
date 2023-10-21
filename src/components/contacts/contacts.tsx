@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import Card from "../ui/card";
+import { css } from "@emotion/react";
+import { buttonStyle, errorButtonStyle } from "../form/form-style";
 
 interface ContactsProps {
   items?: Contact[];
@@ -16,15 +18,43 @@ const ContactsContainer = styled.div`
   }
 `;
 
+const contactContentStyled = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const contactFavstyled = css`
+  align-self: end;
+  cursor: pointer;
+`;
+
+const contactActstyled = css`
+  display: flex;
+  gap: 1rem;
+`;
+
 export default function Contacts({ items }: ContactsProps) {
   return (
     <ContactsContainer>
       {items?.map((contact) => (
         <Card key={contact.id}>
-          <p>
-            {contact.first_name} {contact.last_name}
-          </p>
-          <p>{contact.phones[0]?.number}</p>
+          <div css={contactContentStyled}>
+            <img
+              css={contactFavstyled}
+              src="/icons/love-thin-white.svg"
+              alt="love-thin-white"
+            />
+            <p>
+              {contact.first_name} {contact.last_name}
+            </p>
+            <p>{contact.phones[0]?.number}</p>
+            <div css={contactActstyled}>
+              <button css={buttonStyle}>EDIT</button>
+              <button css={errorButtonStyle}>DELETE</button>
+            </div>
+          </div>
         </Card>
       ))}
     </ContactsContainer>

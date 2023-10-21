@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { buttonStyle, formControlPhone, inputPhoneStyle } from "./form-style";
+import { buttonStyle, errorButtonStyle, formControlPhone, inputPhoneStyle } from "./form-style";
 
 interface PhonesInputProps {
   value: Phone[];
@@ -60,7 +60,7 @@ export default function PhonesInput({
             required
           />
           <button
-            css={buttonStyle}
+            css={errorButtonStyle}
             type="button"
             onClick={() => removePhone(index)}
             disabled={disabled}
