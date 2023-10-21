@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { GET_CONTACT_DETAIL } from "../../graphql/queries/contact-queries";
@@ -11,6 +11,10 @@ import {
   labelStyle,
   submitButtonStyle,
 } from "./form-style";
+import { titleContainerStyle } from "../globalStyle";
+import EditFormPhone from "./edit-phone-form";
+import Divider from "../ui/divider";
+import AddFormPhone from "./add-phone-form";
 
 interface EditContactProps {
   contactId?: string;
@@ -38,10 +42,6 @@ export default function EditContactForm({ contactId }: EditContactProps) {
 
   const [editContact, { loading: loadingEdit, error: errorEdit }] =
     useMutation(EDIT_CONTACT_BY_ID);
-
-  useEffect(() => {
-    console.log(phones);
-  }, [phones]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -104,8 +104,31 @@ export default function EditContactForm({ contactId }: EditContactProps) {
           {loadingEdit ? "SUBMITTING..." : "SUBMIT"}
         </button>
       </form>
-      {/* TODO: ADD FORM TO EDIT PHONE */}
-      {/* TODO: ADD FORM TO ADD PHONE TO CONTACT*/}
+      <br />
+      <br />
+      <div css={titleContainerStyle}>
+        <h1>Edit Phone</h1>
+      </div>
+      <Divider />
+
+      {phones.map((phone) => {
+        return (
+          <EditFormPhone
+            key={phone.number}
+            phone={phone}
+            contactId={contactId}
+            refetchDetail={() => refetch()}
+          />
+        );
+      })}
+
+      <br />
+      <br />
+      <div css={titleContainerStyle}>
+        <h1>Add Phone</h1>
+      </div>
+      <Divider />
+      <AddFormPhone contactId={contactId} refetchDetail={() => refetch()} />
     </>
   );
 }

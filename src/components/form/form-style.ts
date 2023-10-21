@@ -7,9 +7,9 @@ export const errorFlag = css`
   color: white;
   width: 100%;
   @media (min-width: 768px) {
-    width: 673px
+    width: 673px;
   }
-`
+`;
 
 export const formControl = css`
   margin-bottom: 2rem;
@@ -117,4 +117,10 @@ export const errorButtonStyle = css`
     cursor: not-allowed;
     pointer-events: none;
   }
-`
+`;
+
+export const formControlEditPhone = css`
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+`;

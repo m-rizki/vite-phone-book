@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 
 import { titleContainerStyle } from "../components/globalStyle";
 import Divider from "../components/ui/divider";
-import EditContactForm from "../components/form/edit-contact";
+import EditContactForm from "../components/form/edit-contact-form";
 
 const EditContact = () => {
   const { contactId } = useParams();
