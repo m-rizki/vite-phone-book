@@ -60,6 +60,7 @@ export default function PhonesInput({
             required
           />
           <button
+            title="remove"
             css={errorButtonStyle}
             type="button"
             onClick={() => removePhone(index)}
@@ -70,6 +71,7 @@ export default function PhonesInput({
         </div>
       ))}
       <button
+        title="add"
         css={buttonStyle}
         type="button"
         onClick={addPhone}

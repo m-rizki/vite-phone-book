@@ -6,7 +6,7 @@ import { GET_CONTACT_LIST } from "../graphql/queries/contact-queries";
 
 import Contacts from "../components/contacts/contacts";
 
-import { buttonStyle } from "../components/form/form-style";
+import { buttonStyle, errorFlag } from "../components/form/form-style";
 import Divider from "../components/ui/divider";
 import { titleContainerStyle } from "../components/globalStyle";
 
@@ -28,7 +28,7 @@ const Home = () => {
     variables: {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
-      order_by: [{ created_at: "desc" }],
+      order_by: [{ first_name: "asc" }],
     },
   });
 
@@ -38,11 +38,11 @@ const Home = () => {
     <section>
       <div css={titleContainerStyle}>
         <h1>Contacts</h1>
-        <button css={buttonStyle} onClick={() => navigate("/contact")}>+</button>
+        <button title="Add Contact" css={buttonStyle} onClick={() => navigate("/contact")}>+</button>
       </div>
       <Divider />
       {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+      {error && <p css={errorFlag}>Error: {error.message}</p>}
 
       <Contacts items={contacts} />
 

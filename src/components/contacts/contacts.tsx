@@ -42,6 +42,7 @@ export default function Contacts({ items }: ContactsProps) {
         <Card key={contact.id}>
           <div css={contactContentStyled}>
             <img
+              title="add to favorite"
               css={contactFavstyled}
               src="/icons/love-thin-white.svg"
               alt="love-thin-white"
@@ -51,8 +52,12 @@ export default function Contacts({ items }: ContactsProps) {
             </p>
             <p>{contact.phones[0]?.number}</p>
             <div css={contactActstyled}>
-              <button css={buttonStyle}>EDIT</button>
-              <button css={errorButtonStyle}>DELETE</button>
+              <button css={buttonStyle} title="edit">
+                <img src="/icons/edit.svg" alt="edit" width={15} />
+              </button>
+              <button css={errorButtonStyle} title="delete">
+                <img src="/icons/delete.svg" alt="delete" width={15} />
+              </button>
             </div>
           </div>
         </Card>

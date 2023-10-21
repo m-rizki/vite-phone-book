@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 import { ADD_CONTACT_WITH_PHONES } from "../../graphql/mutations/contact-mutations";
 
-import { formControl, inputStyle, labelStyle, submitButtonStyle } from "./form-style";
+import {
+  errorFlag,
+  formControl,
+  inputStyle,
+  labelStyle,
+  submitButtonStyle,
+} from "./form-style";
 import PhonesInput from "./phones-input";
 import { GET_CONTACT_LIST } from "../../graphql/queries/contact-queries";
 
@@ -44,7 +50,8 @@ export default function CreateContact() {
 
   return (
     <form onSubmit={onSubmit}>
-      {error && <p>{`Submission error! ${error.message}`}</p>}
+      {error && <p css={errorFlag}>{`Submission error! ${error.message}`}</p>}
+
       <div css={formControl}>
         <label css={labelStyle}>First Name</label>
         <input

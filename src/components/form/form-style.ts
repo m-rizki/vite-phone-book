@@ -1,5 +1,16 @@
 import { css } from "@emotion/react";
 
+export const errorFlag = css`
+  background-color: #e11d48;
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: white;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 673px
+  }
+`
+
 export const formControl = css`
   margin-bottom: 2rem;
 

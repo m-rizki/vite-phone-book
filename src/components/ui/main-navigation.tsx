@@ -11,7 +11,7 @@ const MainNavigation = () => {
     <header>
       <NavigationContainer>
         <NavLink to={``}>
-          <img src="/icons/contacts.svg" alt="contacts" />
+          <img src="/icons/contacts.svg" alt="contacts" title="contacts" />
         </NavLink>
       </NavigationContainer>
     </header>
