@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 import { useMutation } from "@apollo/client";
 
@@ -42,6 +43,8 @@ const contactActstyled = css`
 `;
 
 export default function Contacts({ items }: ContactsProps) {
+  const navigate = useNavigate();
+
   const [deleteContact, { loading, error }] = useMutation(DELETE_CONTACT);
 
   const handleDelete = async (id: number) => {
@@ -80,7 +83,12 @@ export default function Contacts({ items }: ContactsProps) {
             </p>
             <p>{contact.phones[0]?.number}</p>
             <div css={contactActstyled}>
-              <button css={buttonStyle} title="edit" disabled={loading}>
+              <button
+                css={buttonStyle}
+                title="edit"
+                disabled={loading}
+                onClick={() => navigate(`contact/${contact.id}/edit`)}
+              >
                 <img src="/icons/edit.svg" alt="edit" width={15} />
               </button>
               <button

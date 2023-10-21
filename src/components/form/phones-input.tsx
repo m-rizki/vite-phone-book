@@ -1,19 +1,24 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { buttonStyle, errorButtonStyle, formControlPhone, inputPhoneStyle } from "./form-style";
+import {
+  buttonStyle,
+  errorButtonStyle,
+  formControlPhone,
+  inputPhoneStyle,
+} from "./form-style";
 
 interface PhonesInputProps {
   value: Phone[];
   onPhoneChange: (phones: Phone[]) => void;
   disabled: boolean;
-  reset: boolean; // New prop to control the reset
+  reset?: boolean;
 }
 
-export default function PhonesInput({
+const PhonesInput = ({
   value,
   onPhoneChange,
   disabled,
   reset,
-}: PhonesInputProps) {
+}: PhonesInputProps) => {
   const [phones, setPhones] = useState<Phone[]>(value);
 
   useEffect(() => {
@@ -57,6 +62,8 @@ export default function PhonesInput({
             value={phone.number}
             onChange={(event) => handlePhonesChange(index, event)}
             disabled={disabled}
+            pattern="^[0-9+]+$"
+            title="Phone number can only contain numbers and the plus symbol (+)"
             required
           />
           <button
@@ -81,4 +88,6 @@ export default function PhonesInput({
       </button>
     </div>
   );
-}
+};
+
+export default PhonesInput;

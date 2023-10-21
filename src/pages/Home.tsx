@@ -38,7 +38,7 @@ const Home = () => {
     <section>
       <div css={titleContainerStyle}>
         <h1>Contacts</h1>
-        <button title="Add Contact" css={buttonStyle} onClick={() => navigate("/contact")}>+</button>
+        <button title="Add Contact" css={buttonStyle} onClick={() => navigate("/contact/add")}>+</button>
       </div>
       <Divider />
       {loading && <p>Loading...</p>}
