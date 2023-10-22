@@ -48,7 +48,7 @@ export default function AddFormPhone({
           required
         />
         <button type="submit" css={buttonStyle} disabled={loading}>
-          Add
+          {loading ? "ADDING..." : "ADD"}
         </button>
       </div>
     </form>

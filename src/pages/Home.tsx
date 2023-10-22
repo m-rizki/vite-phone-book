@@ -29,6 +29,7 @@ const Home = () => {
 
   const [page, setPage] = useState(0);
   const [contacts, setContacts] = useState<Contact[] | []>([]);
+  const [filteredContacts, setFilteredContacts] = useState<Contact[] | []>([]);
   const [favContacts, setfavContacts] = useState<Contact[] | []>([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -60,13 +61,18 @@ const Home = () => {
     onCompleted: (queryData) => {
       const contactsQuery: Contact[] = queryData?.contact || [];
       const favContact = getFavoriteContacts();
+
       setfavContacts(favContact);
 
       // Filter out contacts that are also in favContact
       const filteredContacts = contactsQuery.filter((contact) => {
         return !favContact.some((fav) => fav.id === contact.id);
       });
-      setContacts(filteredContacts);
+
+      // Store the original query result separately for pagination
+      setContacts(contactsQuery);
+      // Set filtered contacts for rendering
+      setFilteredContacts(filteredContacts);
     },
   });
 
@@ -110,7 +116,7 @@ const Home = () => {
       {error && <p css={errorFlag}>Error: {error.message}</p>}
 
       <Contacts
-        items={contacts}
+        items={filteredContacts}
         refetchContacts={() => refetch()}
         isFavorite={false}
       />

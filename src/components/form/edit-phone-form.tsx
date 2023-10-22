@@ -51,7 +51,7 @@ export default function EditFormPhone({
           required
         />
         <button type="submit" css={buttonStyle} disabled={loading}>
-          Update
+          {loading ? "UPDATING..." : "UPDATE"}
         </button>
       </div>
     </form>
