@@ -6,7 +6,6 @@ import {
 } from "./form-style";
 import { useMutation } from "@apollo/client";
 import { ADD_NUMBER_TO_CONTACT } from "../../graphql/mutations/phone-mutations";
-import { useNavigate } from "react-router-dom";
 
 interface AddFormPhoneProps {
   contactId?: string;
@@ -17,8 +16,6 @@ export default function AddFormPhone({
   contactId,
   refetchDetail,
 }: AddFormPhoneProps) {
-  const navigate = useNavigate();
-
   const phoneRef = useRef<HTMLInputElement>(null);
 
   const [addPhone, { loading }] = useMutation(ADD_NUMBER_TO_CONTACT);
@@ -36,7 +33,6 @@ export default function AddFormPhone({
       phoneRef.current.value = "";
     }
     refetchDetail();
-    navigate(0);
   };
 
   return (

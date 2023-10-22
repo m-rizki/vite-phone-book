@@ -30,7 +30,10 @@ export default function EditContactForm({ contactId }: EditContactProps) {
     variables: {
       id: Number(contactId) || null,
     },
+    fetchPolicy: 'network-only',
+    notifyOnNetworkStatusChange: true,
     onCompleted: async (queryData) => {
+      console.log(queryData)
       const data: Contact = queryData.contact_by_pk;
 
       setFirstName(data.first_name);
