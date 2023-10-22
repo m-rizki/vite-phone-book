@@ -6,9 +6,14 @@ import { GET_CONTACT_LIST } from "../graphql/queries/contact-queries";
 
 import Contacts from "../components/contacts/contacts";
 
-import { buttonStyle, errorFlag } from "../components/form/form-style";
+import {
+  buttonStyle,
+  errorFlag,
+  inputStyle,
+} from "../components/form/form-style";
 import Divider from "../components/ui/divider";
 import { titleContainerStyle } from "../components/globalStyle";
+import { useDebounce } from "../hooks/useDebounce";
 
 const paginationStyle = css`
   margin: 1rem;
@@ -25,6 +30,9 @@ const Home = () => {
   const [page, setPage] = useState(0);
   const [contacts, setContacts] = useState<Contact[] | []>([]);
   const [favContacts, setfavContacts] = useState<Contact[] | []>([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const debouncedSearchValue = useDebounce<string>(searchValue, 500);
 
   const getFavoriteContacts = (): Contact[] | [] => {
     const storedFavoriteContactsJSON =
@@ -41,6 +49,11 @@ const Home = () => {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
       order_by: [{ first_name: "asc" }],
+      where: {
+        first_name: {
+          _like: `%${debouncedSearchValue}%`,
+        },
+      },
     },
     fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
@@ -59,6 +72,18 @@ const Home = () => {
 
   return (
     <section>
+      <br />
+      <br />
+      <div css={titleContainerStyle}>
+        <span></span>
+        <input
+          css={inputStyle}
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
+          placeholder="Search First Name..."
+        />
+      </div>
       <div css={titleContainerStyle}>
         <h1>Favorite</h1>
       </div>
