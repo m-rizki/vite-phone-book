@@ -10,9 +10,8 @@ import { GET_CONTACT_LIST } from "../../graphql/queries/contact-queries";
 import Card from "../ui/card";
 import { buttonStyle, errorButtonStyle } from "../form/form-style";
 
-interface ContactsProps {
+interface FavoriteContactsProps {
   items?: Contact[];
-  isFavorite?: boolean;
   refetchContacts: () => void;
 }
 
@@ -44,11 +43,7 @@ const contactActstyled = css`
   gap: 1rem;
 `;
 
-export default function Contacts({
-  items,
-  refetchContacts,
-  isFavorite,
-}: ContactsProps) {
+export default function FavoriteContacts({ items, refetchContacts }: FavoriteContactsProps) {
   const navigate = useNavigate();
 
   const [deleteContact, { loading, error }] = useMutation(DELETE_CONTACT);
@@ -67,7 +62,7 @@ export default function Contacts({
     }
   };
 
-  const getFavoriteContacts = (): Contact[] | [] => {
+  const getFavoriteContacts = (): number[] => {
     const storedFavoriteContactsJSON =
       localStorage.getItem("favorite_contacts");
     if (storedFavoriteContactsJSON) {
@@ -77,25 +72,11 @@ export default function Contacts({
     }
   };
 
-  const addToFavoriteContacts = (contact: Contact) => {
-    const favoriteContacts: Contact[] | [] = getFavoriteContacts();
+  const addToFavoriteContacts = (contactId: number) => {
+    const favoriteContacts = getFavoriteContacts();
 
-    const contactExists = favoriteContacts.some((c) => c.id === contact.id);
-
-    if (!contactExists) {
-      const newFavContacts = [...favoriteContacts, contact];
-      localStorage.setItem("favorite_contacts", JSON.stringify(newFavContacts));
-      refetchContacts();
-    }
-  };
-
-  const removeToFavoriteContacts = (contact: Contact) => {
-    const favoriteContacts: Contact[] | [] = getFavoriteContacts();
-
-    const contactIndex = favoriteContacts.findIndex((c) => c.id === contact.id);
-
-    if (contactIndex !== -1) {
-      favoriteContacts.splice(contactIndex, 1);
+    if (!favoriteContacts.includes(contactId)) {
+      favoriteContacts.push(contactId);
       localStorage.setItem(
         "favorite_contacts",
         JSON.stringify(favoriteContacts)
@@ -115,26 +96,13 @@ export default function Contacts({
       {items?.map((contact) => (
         <Card key={contact.id}>
           <div css={contactContentStyled}>
-            {isFavorite ? (
-              <img
-                title="remove to favorite"
-                css={contactFavstyled}
-                src="/icons/love.svg"
-                alt="love"
-                width={30}
-                onClick={() => removeToFavoriteContacts(contact)}
-              />
-            ) : (
-              <img
-                title="add to favorite"
-                css={contactFavstyled}
-                src="/icons/love-thin-white.svg"
-                alt="love-thin-white"
-                width={30}
-                onClick={() => addToFavoriteContacts(contact)}
-              />
-            )}
-
+            <img
+              title="add to favorite"
+              css={contactFavstyled}
+              src="/icons/love.svg"
+              alt="love"
+              onClick={() => addToFavoriteContacts(contact.id)}
+            />
             <p>
               {contact.first_name} {contact.last_name}
             </p>
