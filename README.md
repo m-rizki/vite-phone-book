@@ -1,5 +1,21 @@
 # React + TypeScript + Vite - Phone Book Project
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Installation
+
+```bash
+pnpm install
+
+# run project (local)
+pnpm run dev
+```
+
 ```bash
 # first installation note
 pnpm create vite
@@ -18,12 +34,13 @@ pnpm add @apollo/client graphql
 pnpm add @emotion/react @emotion/styled
 ```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Environment Variable Setup
 
-Currently, two official plugins are available:
+Create `.env.local` for local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```env
+VITE_GQL_ENDPOINT=https://some-url.com/graphql
+```
 
 ## Expanding the ESLint configuration
 
