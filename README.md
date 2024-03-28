@@ -1,5 +1,21 @@
 # React + TypeScript + Vite - Phone Book Project
 
+A project where users can easily view, search, add to favorites, create, edit, and delete contacts.
+
+[![Vite Phone Book](./public//vite-phone-book.png)](http://localhost:5173/)
+
+> **Warning**
+> This project is still in development and is not ready for production use.
+
+## Tech Stack
+
+- [React](https://react.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [React Router](https://reactrouter.com/en/main)
+- [Apollo GraphQl (React)](https://www.apollographql.com/docs/react)
+- [emotionCSS](https://emotion.sh/docs/introduction)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
